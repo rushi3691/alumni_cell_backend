@@ -24,6 +24,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "bun --watch index.ts"
+    "dev": "bun --watch index.ts",
+    "postinstall": "prisma generate"
   }
 }
