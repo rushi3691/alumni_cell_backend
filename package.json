@@ -23,7 +23,7 @@
     "zod": "^3.22.4"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "bun index.ts",
     "dev": "bun --watch index.ts",
     "postinstall": "prisma generate"
   }
