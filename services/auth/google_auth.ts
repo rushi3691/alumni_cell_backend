@@ -1,6 +1,6 @@
 import { OAuth2Client } from "google-auth-library";
 import { Request, Response, NextFunction } from "express";
-import { sendResponse } from "../types";
+import { sendResponse } from "../utils";
 import { ExtendedRequest } from "./custom_types";
 
 const clientIdWeb = Bun.env["CLIENT_ID_WEB"];

@@ -1,7 +1,7 @@
 import { CookieOptions, Response } from "express";
 import { create_user, get_user_by_uuid } from "../../db/user_ops";
 import { ExtendedRequest } from "./custom_types";
-import { sendResponse } from "../types";
+import { sendResponse } from "../utils";
 import { getSignedToken } from "./jwt";
 
 
@@ -51,11 +51,11 @@ export const LoginController = async (req: ExtendedRequest, res: Response) => {
     // });
 
     const cookieOptions: CookieOptions = {
-      sameSite: "none",
+      sameSite: "lax",
       path: "/",
       expires: new Date(Date.now() + 86100000), // 1day
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production"
     };
 
     
