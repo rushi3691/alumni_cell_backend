@@ -17,5 +17,5 @@ RUN bunx prisma generate
 
 # RUN bun run build
 ENV NODE_ENV production
-EXPOSE 8080
+EXPOSE 8000
 ENTRYPOINT [ "bun", "run", "start" ]
