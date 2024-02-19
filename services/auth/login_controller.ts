@@ -51,7 +51,7 @@ export const LoginController = async (req: ExtendedRequest, res: Response) => {
     // });
 
     const cookieOptions: CookieOptions = {
-      sameSite: "lax",
+      sameSite: "none",
       path: "/",
       expires: new Date(Date.now() + 86100000), // 1day
       httpOnly: true,
