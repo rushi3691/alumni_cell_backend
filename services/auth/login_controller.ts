@@ -17,13 +17,14 @@ export const LoginController = async (req: ExtendedRequest, res: Response) => {
     }
 
     let user = await get_user_by_uuid(req.user_uuid);
-
+    let new_user = false;
     if (!user) {
       user = await create_user({
         uuid: req.user_uuid,
         email: req.email,
         name: req.user_name,
       });
+      new_user = true;
     }
 
     const new_token = getSignedToken(
@@ -41,15 +42,6 @@ export const LoginController = async (req: ExtendedRequest, res: Response) => {
       { expiresIn: "1d" }
     );
 
-    // set cookie
-    // const res_w_cookies = res.cookie("token", new_token, cookieOptions);
-
-    // return sendResponse(res_w_cookies, {
-    //   status: 200,
-    //   data: user,
-    //   error: null,
-    // });
-
     const cookieOptions: CookieOptions = {
       sameSite: "none",
       path: "/",
@@ -61,7 +53,7 @@ export const LoginController = async (req: ExtendedRequest, res: Response) => {
     
     res.cookie("my_token", new_token, cookieOptions).json({
       status: 200,
-      data: user,
+      data: {...user, new_user},
       error: null,
     });
 
