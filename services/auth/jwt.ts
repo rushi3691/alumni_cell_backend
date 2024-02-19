@@ -57,12 +57,13 @@ export const jwtVerifyMiddleware = (
   next: NextFunction
 ) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer token
-    if (token) {
-      const decoded = verify(token, process.env.JWT_SECRET!) as IJWTPayload;
-      if (decoded) {
-        req.user = decoded;
-      }
+    const token = req.cookies["my_token"];
+    if (!token) {
+      throw new Error("No token found");
+    }
+    const decoded = verify(token, process.env.JWT_SECRET!) as IJWTPayload;
+    if (decoded) {
+      req.user = decoded;
     }
     next();
   } catch (e: any) {
@@ -74,8 +75,11 @@ export const jwtVerifyMiddleware = (
   }
 };
 
-
-export const isAdmin = (req: IExtendedRequestWithUser, res: Response, next: NextFunction) => {
+export const isAdmin = (
+  req: IExtendedRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.user?.role === "ADMIN") {
     next();
   } else {
@@ -85,9 +89,13 @@ export const isAdmin = (req: IExtendedRequestWithUser, res: Response, next: Next
       error: "Forbidden",
     });
   }
-}
+};
 
-export const isVerificationStaff = (req: IExtendedRequestWithUser, res: Response, next: NextFunction) => {
+export const isVerificationStaff = (
+  req: IExtendedRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.user?.role === "VERIFICATION_STAFF") {
     next();
   } else {
@@ -97,9 +105,13 @@ export const isVerificationStaff = (req: IExtendedRequestWithUser, res: Response
       error: "Forbidden",
     });
   }
-}
+};
 
-export const isAccountsStaff = (req: IExtendedRequestWithUser, res: Response, next: NextFunction) => {
+export const isAccountsStaff = (
+  req: IExtendedRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.user?.role === "PAYMENT_STAFF") {
     next();
   } else {
@@ -109,9 +121,13 @@ export const isAccountsStaff = (req: IExtendedRequestWithUser, res: Response, ne
       error: "Forbidden",
     });
   }
-}
+};
 
-export const isMember = (req: IExtendedRequestWithUser, res: Response, next: NextFunction) => {
+export const isMember = (
+  req: IExtendedRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.user?.is_member) {
     next();
   } else {
@@ -121,10 +137,13 @@ export const isMember = (req: IExtendedRequestWithUser, res: Response, next: Nex
       error: "Forbidden",
     });
   }
-}
+};
 
-
-export const isVerified = (req: IExtendedRequestWithUser, res: Response, next: NextFunction) => {
+export const isVerified = (
+  req: IExtendedRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.user?.is_verified) {
     next();
   } else {
@@ -134,10 +153,13 @@ export const isVerified = (req: IExtendedRequestWithUser, res: Response, next: N
       error: "Forbidden",
     });
   }
-}
+};
 
-
-export const isPaid = (req: IExtendedRequestWithUser, res: Response, next: NextFunction) => {
+export const isPaid = (
+  req: IExtendedRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.user?.paid) {
     next();
   } else {
@@ -147,6 +169,4 @@ export const isPaid = (req: IExtendedRequestWithUser, res: Response, next: NextF
       error: "Forbidden",
     });
   }
-}
-
-
+};
