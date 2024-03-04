@@ -1,6 +1,6 @@
 {
   "name": "alumni_site_backend_express",
-  "module": "index.ts",
+  "module": "api/index.ts",
   "type": "module",
   "devDependencies": {
     "@types/cookie-parser": "^1.4.6",
@@ -23,8 +23,8 @@
     "zod": "^3.22.4"
   },
   "scripts": {
-    "start": "bun index.ts",
-    "dev": "bun --watch index.ts",
+    "start": "bun api/index.ts",
+    "dev": "bun --watch api/index.ts",
     "postinstall": "prisma generate"
   }
 }
