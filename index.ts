@@ -3,7 +3,7 @@ import express from "express";
 import authrouter from "./services/auth/route";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
+import vfstaffrouter from "./services/staff/route";
 
 const app = express();
 app.use(express.json());
@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authrouter);
+app.use("/vf-staff", vfstaffrouter)
 
 app.listen(8000, () => {
   console.log(`server started at http://localhost:8000`);
