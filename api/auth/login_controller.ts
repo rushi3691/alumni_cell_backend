@@ -44,11 +44,11 @@ export const LoginController = async (req: ExtendedRequest, res: Response) => {
     );
 
     const cookieOptions: CookieOptions = {
-      sameSite: "none",
+      sameSite: process.env.NODE_ENV === "production" && "strict",
       path: "/",
       expires: new Date(Date.now() + 86100000), // 1day
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production"
+      secure: process.env.NODE_ENV === "production",
     };
 
     
