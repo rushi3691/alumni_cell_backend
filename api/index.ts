@@ -3,7 +3,7 @@ import express from "express";
 import authrouter from "./auth/route";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import vfstaffrouter from "./staff/route";
+import vfstaffrouter from "./vf-staff/route";
 
 const app = express();
 app.use(express.json());
