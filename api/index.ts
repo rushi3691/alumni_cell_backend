@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import vfstaffrouter from "./vf-staff/route";
 import accstaffrouter from "./acc-staff/route";
+import staffcommonrouter from "./staff-common/routes";
 
 const app = express();
 app.use(express.json());
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authrouter);
 app.use("/vf-staff", vfstaffrouter);
 app.use("/acc-staff", accstaffrouter);
+app.use("/staff-common", staffcommonrouter);
 
 
 app.listen(8000, () => {

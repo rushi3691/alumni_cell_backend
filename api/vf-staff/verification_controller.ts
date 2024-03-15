@@ -51,22 +51,3 @@ export const UpdateMembershipStatusController = async (
 };
 
 
-export const GetAllUsersController = async (
-  req: IExtendedRequestWithUser,
-  res: Response
-) => {
-  try {
-    const users = await GetAllUsers();
-    return sendResponse(res, {
-      status: 200,
-      data: users,
-      error: null,
-    });
-  } catch (error: any) {
-    return sendResponse(res, {
-      status: 500,
-      data: null,
-      error: error.message,
-    });
-  }
-}
