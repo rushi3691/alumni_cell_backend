@@ -7,6 +7,9 @@ import vfstaffrouter from "./vf-staff/route";
 import accstaffrouter from "./acc-staff/route";
 import staffcommonrouter from "./staff-common/routes";
 
+import swaggerjsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+
 const app = express();
 app.use(express.json());
 app.use(
@@ -17,6 +20,30 @@ app.use(
 );
 
 app.use(cookieParser(process.env["COOKIE_SECRET"]));
+
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Alumni Association API",
+      description: "API Documentation",
+      version: "1.0.0", // Add this line
+      contact: {
+        name: "Rushikesh Pawar",
+      },
+    },
+    servers: [
+      {
+        url: "http://localhost:8000/",
+      },
+    ],
+  },
+  apis: ["./api/**/*.ts"],
+};
+
+const swaggerDocs = swaggerjsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 app.get("/", (req, res) => {
