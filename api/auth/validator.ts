@@ -3,7 +3,7 @@ import { z } from "zod";
 export const RegisterUserSchema = z.object({
   name: z.string(),
   gender: z.enum(["MALE", "FEMALE", "OTHER"]),
-  dob: z.date(),
+  dob: z.coerce.date(),
   role: z.literal("ALUMNI"),
   institute_number: z.string(),
   joining_year: z.number(),
@@ -23,17 +23,20 @@ export const RegisterUserSchema = z.object({
 
 export type RegisterUserSchemaType = z.infer<typeof RegisterUserSchema>;
 
-export type IUpdateUserData = RegisterUserSchemaType & { id: number, payment_method?: "ONLINE" | "CONSENT"};
+export type IUpdateUserData = RegisterUserSchemaType & {
+  id: number;
+  payment_method?: "ONLINE" | "CONSENT";
+};
 
 export const RegisterStaffSchema = z.object({
   name: z.string(),
   gender: z.enum(["MALE", "FEMALE", "OTHER"]),
-  dob: z.date(),
+  dob: z.coerce.date(),
   role: z.enum(["VERIFICATION_STAFF", "PAYMENT_STAFF"]),
   institute_number: z.string(),
   joining_year: z.number(),
   mobile: z.string(),
-})
+});
 
 export type RegisterStaffSchemaType = z.infer<typeof RegisterStaffSchema>;
 
