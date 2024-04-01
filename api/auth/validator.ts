@@ -15,7 +15,7 @@ export const RegisterUserSchema = z.object({
   linkedin: z.string().optional(),
   twitter: z.string().optional(),
   github: z.string().optional(),
-  work_experience: z.array(z.string()),
+  work_experience: z.string(),
   skills: z.array(z.string()),
   address: z.string(),
   is_consent: z.boolean(),

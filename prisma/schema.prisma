@@ -55,7 +55,7 @@ model User {
   // address
   address          String?
   // work experience
-  work_experience  String[]
+  work_experience  String?
   // skills
   skills           String[]
   // states
