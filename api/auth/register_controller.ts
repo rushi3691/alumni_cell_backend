@@ -2,7 +2,7 @@ import { Response } from "express";
 import { sendResponse } from "../utils";
 import { IExtendedRequestWithUser } from "./jwt";
 import { RegisterStaffSchema, RegisterUserSchema } from "./validator";
-import { update_user } from "../../db/user_ops";
+import { update_staff, update_user } from "../../db/user_ops";
 
 export const RegisterControllerAlumni = async (
   req: IExtendedRequestWithUser,
@@ -44,9 +44,9 @@ export const RegisterControllerStaff = async (
     // validate the body
     const validatedBody = RegisterStaffSchema.parse(body);
     // update the user
-    const user = await update_user({
+    const user = await update_staff({
       id: req.user!.id,
-      ...validatedBody
+      ...validatedBody,
     });
     // send the response
     return sendResponse(res, {
