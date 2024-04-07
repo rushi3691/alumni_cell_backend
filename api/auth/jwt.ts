@@ -171,14 +171,17 @@ export const isPaid = (
   }
 };
 
-
 // check if staff
 export const isStaff = (
   req: IExtendedRequestWithUser,
   res: Response,
   next: NextFunction
 ) => {
-  if (req.user?.role === "VERIFICATION_STAFF" || req.user?.role === "PAYMENT_STAFF" || req.user?.role === "ADMIN") {
+  if (
+    req.user?.role === "VERIFICATION_STAFF" ||
+    req.user?.role === "PAYMENT_STAFF" ||
+    req.user?.role === "ADMIN"
+  ) {
     next();
   } else {
     return sendResponse(res, {

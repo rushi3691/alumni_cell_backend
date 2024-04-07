@@ -10,4 +10,3 @@ const membershipOrder = z.object({
 });
 
 export const OrderSchema = z.union([donationOrder, membershipOrder]);
-

@@ -5,7 +5,10 @@ import {
   UpdateVerificationStatus,
 } from "../../db/verification_ops";
 import { sendResponse } from "../utils";
-import { UpdateMembershipStatusSchema, UpdateVerificationStatusSchema } from "./validator";
+import {
+  UpdateMembershipStatusSchema,
+  UpdateVerificationStatusSchema,
+} from "./validator";
 import { IExtendedRequestWithUser } from "../auth/jwt";
 
 export const UpdateVerificationStatusController = async (
@@ -34,7 +37,9 @@ export const UpdateMembershipStatusController = async (
   res: Response
 ) => {
   try {
-    const { id, membership_status } = UpdateMembershipStatusSchema.parse(req.body);
+    const { id, membership_status } = UpdateMembershipStatusSchema.parse(
+      req.body
+    );
     const user = await UpdateMembershipStatus(id, membership_status);
     return sendResponse(res, {
       status: 200,
@@ -49,5 +54,3 @@ export const UpdateMembershipStatusController = async (
     });
   }
 };
-
-

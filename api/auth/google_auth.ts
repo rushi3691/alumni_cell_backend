@@ -6,12 +6,11 @@ import { IExtendedRequest } from "./custom_types";
 const clientIdWeb = Bun.env["CLIENT_ID_WEB"];
 const clientSecret = Bun.env["CLIENT_SECRET"];
 
-if (!clientIdWeb  || !clientSecret) {
+if (!clientIdWeb || !clientSecret) {
   throw new Error("Missing Google OAuth2 credentials");
 }
 
 const oAuth2Client = new OAuth2Client(clientIdWeb, clientSecret, "postmessage");
-
 
 export const GoogleAuthMiddleware = async (
   req: IExtendedRequest,
@@ -29,7 +28,7 @@ export const GoogleAuthMiddleware = async (
     if (!payload) {
       throw new Error("Invalid token");
     }
-    console.log(payload)
+    console.log(payload);
     // console.log(payload)
     req.user_uuid = payload["sub"];
     req.user_name = payload["name"];
@@ -45,4 +44,3 @@ export const GoogleAuthMiddleware = async (
     });
   }
 };
-

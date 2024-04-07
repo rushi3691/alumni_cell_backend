@@ -6,11 +6,7 @@ import { jwtVerifyMiddleware } from "../auth/jwt";
 
 const router = Router();
 
-router.post(
-  "/create-order",
-  jwtVerifyMiddleware,
-  CreateOrderController
-);
+router.post("/create-order", jwtVerifyMiddleware, CreateOrderController);
 
 router.post("/success", verify_payment);
 

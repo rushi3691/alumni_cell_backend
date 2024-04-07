@@ -4,8 +4,6 @@ import { sendResponse } from "../utils";
 import { UpdatePaidStatusSchema } from "./validator";
 import { UpdatePaidStatus } from "../../db/accounts_ops";
 
-
-
 export const UpdatePaidStatusController = async (
   req: IExtendedRequestWithUser,
   res: Response

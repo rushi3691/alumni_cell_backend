@@ -24,7 +24,6 @@ export const RegisterControllerAlumni = async (
       data: user,
       error: null,
     });
-    
   } catch (e: any) {
     return sendResponse(res, {
       status: 500,
@@ -33,7 +32,6 @@ export const RegisterControllerAlumni = async (
     });
   }
 };
-
 
 export const RegisterControllerStaff = async (
   req: IExtendedRequestWithUser,

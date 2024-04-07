@@ -3,8 +3,6 @@ import { getSignedToken } from "./jwt";
 import { CookieOptions, Response } from "express";
 
 export const generate_cookie = (res: Response, user: User) => {
-  // delete old cookie
-//   res.clearCookie("my_token");
   const new_token = getSignedToken(
     {
       id: user.id,

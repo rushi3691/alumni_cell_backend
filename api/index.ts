@@ -1,4 +1,3 @@
-
 import express from "express";
 import authrouter from "./auth/route";
 import cors from "cors";
@@ -23,7 +22,6 @@ app.use(
 
 app.use(cookieParser(process.env["COOKIE_SECRET"]));
 
-
 const swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
@@ -47,7 +45,6 @@ const swaggerOptions = {
 const swaggerDocs = swaggerjsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" });
 });
@@ -61,10 +58,8 @@ app.use("/admin", adminrouter);
 // payment routes
 app.use("/razorpay", razorpayrouter);
 
-
 app.listen(8000, () => {
   console.log(`server started at http://localhost:8000`);
 });
 
 export default app;
-

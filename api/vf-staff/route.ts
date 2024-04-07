@@ -1,6 +1,10 @@
 import { Router } from "express";
 
-import { isVerificationStaff, isVerified, jwtVerifyMiddleware } from "../auth/jwt";
+import {
+  isVerificationStaff,
+  isVerified,
+  jwtVerifyMiddleware,
+} from "../auth/jwt";
 import {
   UpdateMembershipStatusController,
   UpdateVerificationStatusController,
