@@ -3,8 +3,7 @@ import { create_user, get_user_by_uuid } from "../../db/user_ops";
 import { IExtendedRequest } from "./custom_types";
 import { sendResponse } from "../utils";
 import { getSignedToken } from "./jwt";
-
-
+import { generate_cookie } from "./cookie";
 
 export const LoginController = async (req: IExtendedRequest, res: Response) => {
   try {
@@ -28,37 +27,40 @@ export const LoginController = async (req: IExtendedRequest, res: Response) => {
       new_user = true;
     }
 
-    const new_token = getSignedToken(
-      {
-        id: user.id,
-        uuid: user.uuid,
-        name: user.name,
-        email: user.email,
-        paid: user.paid,
-        role: user.role,
-        is_member: user.isMember,
-        is_verified: user.isVerified,
-      },
-      process.env.JWT_SECRET!,
-      { expiresIn: "1d" }
-    );
+    // const new_token = getSignedToken(
+    //   {
+    //     id: user.id,
+    //     uuid: user.uuid,
+    //     name: user.name,
+    //     email: user.email,
+    //     paid: user.paid,
+    //     role: user.role,
+    //     is_member: user.isMember,
+    //     is_verified: user.isVerified,
+    //   },
+    //   process.env.JWT_SECRET!,
+    //   { expiresIn: "1d" }
+    // );
 
-    const cookieOptions: CookieOptions = {
-      sameSite: process.env.NODE_ENV === "production" && "strict",
-      path: "/",
-      expires: new Date(Date.now() + 86100000), // 1day
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-    };
+    // const cookieOptions: CookieOptions = {
+    //   sameSite: process.env.NODE_ENV === "production" && "strict",
+    //   path: "/",
+    //   expires: new Date(Date.now() + 86100000), // 1day
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    // };
 
-    
-    res.cookie("my_token", new_token, cookieOptions).json({
+    // return generate_cookie(res, user).json({
+    //   status: 200,
+    //   data: {...user, new_user},
+    //   error: null,
+    // });
+
+    return sendResponse(generate_cookie(res, user), {
       status: 200,
-      data: {...user, new_user},
+      data: { ...user, new_user },
       error: null,
     });
-
-
   } catch (error: any) {
     return sendResponse(res, {
       status: 500,
