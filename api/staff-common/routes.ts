@@ -1,7 +1,10 @@
 import { Router } from "express";
 
 import { isStaff, isVerified, jwtVerifyMiddleware } from "../auth/jwt";
-import { GetAllUsersController } from "./staff_controller";
+import {
+  GetAllUsersController,
+  GetTotalUsersCountController,
+} from "./staff_controller";
 
 const router = Router();
 
@@ -34,6 +37,15 @@ router.get(
   isStaff,
   isVerified,
   GetAllUsersController
+);
+
+// get users count
+router.get(
+  "/users-count",
+  jwtVerifyMiddleware,
+  isStaff,
+  isVerified,
+  GetTotalUsersCountController
 );
 
 export default router;

@@ -45,9 +45,24 @@ const RemoveMember = async (id: number) => {
   return user;
 };
 
-export const GetAllUsers = async () => {
-  const users = await prisma.user.findMany();
+export const GetAllUsers = async (
+  limit: number | undefined,
+  offset: number | undefined
+) => {
+  // role: ALUMNI
+  const users = await prisma.user.findMany({
+    where: {
+      role: "ALUMNI",
+    },
+    take: limit,
+    skip: offset,
+  });
   return users;
+};
+
+export const GetTotalUsersCount = async () => {
+  const count = await prisma.user.count();
+  return count;
 };
 
 export const GetUnverifiedUsers = async () => {
