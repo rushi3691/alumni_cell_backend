@@ -1,7 +1,7 @@
 import { OAuth2Client } from "google-auth-library";
 import { Request, Response, NextFunction } from "express";
 import { sendResponse } from "../utils";
-import { ExtendedRequest } from "./custom_types";
+import { IExtendedRequest } from "./custom_types";
 
 const clientIdWeb = Bun.env["CLIENT_ID_WEB"];
 const clientSecret = Bun.env["CLIENT_SECRET"];
@@ -14,7 +14,7 @@ const oAuth2Client = new OAuth2Client(clientIdWeb, clientSecret, "postmessage");
 
 
 export const GoogleAuthMiddleware = async (
-  req: ExtendedRequest,
+  req: IExtendedRequest,
   res: Response,
   next: NextFunction
 ) => {

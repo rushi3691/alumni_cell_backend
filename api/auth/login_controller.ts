@@ -1,12 +1,12 @@
 import { CookieOptions, Response } from "express";
 import { create_user, get_user_by_uuid } from "../../db/user_ops";
-import { ExtendedRequest } from "./custom_types";
+import { IExtendedRequest } from "./custom_types";
 import { sendResponse } from "../utils";
 import { getSignedToken } from "./jwt";
 
 
 
-export const LoginController = async (req: ExtendedRequest, res: Response) => {
+export const LoginController = async (req: IExtendedRequest, res: Response) => {
   try {
     const body = req.body;
     if (!req.user_uuid || !req.user_name || !req.email) {
