@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { isStaff, jwtVerifyMiddleware } from "../auth/jwt";
+import { isStaff, isVerified, jwtVerifyMiddleware } from "../auth/jwt";
 import { GetAllUsersController } from "./staff_controller";
 
 const router = Router();
@@ -28,6 +28,12 @@ const router = Router();
  *       '500':
  *         description: Internal server error
  */
-router.get("/all-users", jwtVerifyMiddleware, isStaff, GetAllUsersController);
+router.get(
+  "/all-users",
+  jwtVerifyMiddleware,
+  isStaff,
+  isVerified,
+  GetAllUsersController
+);
 
 export default router;
