@@ -178,5 +178,5 @@ dist
 .env.local
 .env 
 
-test_glogin
+test_frontend
 .vercel
