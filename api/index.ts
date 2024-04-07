@@ -7,6 +7,7 @@ import vfstaffrouter from "./vf-staff/route";
 import accstaffrouter from "./acc-staff/route";
 import staffcommonrouter from "./staff-common/routes";
 import adminrouter from "./admin/routes";
+import razorpayrouter from "./razorpay/routes";
 
 import swaggerjsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
@@ -56,6 +57,9 @@ app.use("/vf-staff", vfstaffrouter);
 app.use("/acc-staff", accstaffrouter);
 app.use("/staff-common", staffcommonrouter);
 app.use("/admin", adminrouter);
+
+// payment routes
+app.use("/razorpay", razorpayrouter);
 
 
 app.listen(8000, () => {

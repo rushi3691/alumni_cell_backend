@@ -75,12 +75,21 @@ model User {
   payments         Payment[]
 }
 
+enum PaymentReason {
+  MEMBERSHIP
+  DONATION
+}
+
 model Payment {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  amount    Int
-  method    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int           @id @default(autoincrement())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       Int
+  amount       Int
+  order_id     String        @unique
+  reason       PaymentReason
+  status       String
+  payment_id   String?       @unique
+  payment_data Json?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }

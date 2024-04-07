@@ -82,11 +82,10 @@ export const update_staff = async (staff_data: IUpdateStaffData) => {
       institute_number: staff_data.institute_number,
       joining_year: staff_data.joining_year,
       mobile: staff_data.mobile,
-    }
+    },
   });
   return staff;
-}
-
+};
 
 export const get_user_by_id = async (id: number) => {
   const user = await prisma.user.findUnique({
@@ -119,6 +118,19 @@ export const delete_user_by_uuid = async (uuid: string) => {
   const user = await prisma.user.delete({
     where: {
       uuid,
+    },
+  });
+  return user;
+};
+
+// update user's paid status
+export const update_user_paid_status = async (id: number) => {
+  const user = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: {
+      paid: true,
     },
   });
   return user;
