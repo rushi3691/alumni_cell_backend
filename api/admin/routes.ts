@@ -3,6 +3,7 @@ import { Router } from "express";
 import { isAdmin, jwtVerifyMiddleware } from "../auth/jwt";
 import {
   GetStaffController,
+  UpdateMembershipStatusController,
   UpdateStaffVerificationStatusController,
 } from "./admin_controller";
 
@@ -16,5 +17,13 @@ router.post(
 );
 
 router.get("/get-staff", jwtVerifyMiddleware, isAdmin, GetStaffController);
+
+router.post(
+  "/update-membership-status",
+  jwtVerifyMiddleware,
+  isAdmin,
+  UpdateMembershipStatusController
+);
+
 
 export default router;

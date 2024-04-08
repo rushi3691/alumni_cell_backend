@@ -6,5 +6,5 @@ export const UpdateVerificationStatusSchema = z.object({
 
 export const UpdateMembershipStatusSchema = z.object({
   id: z.number(),
-  membership_status: z.boolean(),
+  membership_status: z.literal(true),
 });
