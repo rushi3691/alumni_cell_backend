@@ -15,6 +15,6 @@ router.post(
   UpdateStaffVerificationStatusController
 );
 
-router.post("/get-staff", jwtVerifyMiddleware, isAdmin, GetStaffController);
+router.get("/get-staff", jwtVerifyMiddleware, isAdmin, GetStaffController);
 
 export default router;
