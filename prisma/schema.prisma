@@ -34,46 +34,53 @@ enum Program {
   PHD
 }
 
+enum RegistrationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
 model User {
-  id               Int            @id @default(autoincrement())
-  uuid             String         @unique
-  email            String         @unique
-  name             String
-  dob              DateTime?
-  gender           Gender?
-  institute_number String?        @unique
-  joining_year     Int?
-  graduation_year  Int?
-  program          Program?
-  branch           String?
-  hostel_room_no   String?
+  id                 Int                 @id @default(autoincrement())
+  uuid               String              @unique
+  email              String              @unique
+  name               String
+  dob                DateTime?
+  gender             Gender?
+  institute_number   String?             @unique
+  joining_year       Int?
+  graduation_year    Int?
+  program            Program?
+  branch             String?
+  hostel_room_no     String?
   // contact info
-  mobile           String?
-  linkedin         String?
-  twitter          String?
-  github           String?
+  mobile             String?
+  linkedin           String?
+  twitter            String?
+  github             String?
   // address
-  address          String?
+  address            String?
   // work experience
-  work_experience  String?
+  work_experience    String?
   // skills
-  skills           String[]
+  skills             String[]
   // states
-  isVerified       Boolean        @default(false)
-  paid             Boolean        @default(false)
-  payment_method   PaymentMethod?
-  isMember         Boolean        @default(false)
-  member_since     DateTime?
+  registrationStatus RegistrationStatus?
+  isVerified         Boolean             @default(false)
+  paid               Boolean             @default(false)
+  payment_method     PaymentMethod?
+  isMember           Boolean             @default(false)
+  member_since       DateTime?
   // info for states
-  verifiedBy       String?
-  accountedBy      String?
+  verifiedBy         String?
+  accountedBy        String?
   // roles
-  role             Role           @default(ALUMNI)
+  role               Role                @default(ALUMNI)
   // timestamps
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
   // relations
-  payments         Payment[]
+  payments           Payment[]
 }
 
 enum PaymentReason {

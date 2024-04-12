@@ -16,8 +16,14 @@ export const UpdateVerificationStatusController = async (
   res: Response
 ) => {
   try {
-    const { id } = UpdateVerificationStatusSchema.parse(req.body);
-    const user = await UpdateVerificationStatus(id, req.user!.name);
+    const { id, verification_status } = UpdateVerificationStatusSchema.parse(
+      req.body
+    );
+    const user = await UpdateVerificationStatus(
+      id,
+      verification_status,
+      req.user!.name
+    );
     return sendResponse(res, {
       status: 200,
       data: user,

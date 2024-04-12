@@ -2,12 +2,14 @@ import prisma from "./db";
 
 export const UpdateVerificationStatus = async (
   id: number,
+  verification_status: boolean,
   verified_by: string
 ) => {
   const user = await prisma.user.update({
     where: { id },
     data: {
-      isVerified: true,
+      isVerified: verification_status,
+      registrationStatus: verification_status ? "VERIFIED" : "REJECTED",
       verifiedBy: verified_by,
     },
   });

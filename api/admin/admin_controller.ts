@@ -1,8 +1,14 @@
 import { Response } from "express";
-import { UpdateMembershipStatus, UpdateVerificationStatus } from "../../db/verification_ops";
+import {
+  UpdateMembershipStatus,
+  UpdateVerificationStatus,
+} from "../../db/verification_ops";
 import { IExtendedRequestWithUser } from "../auth/jwt";
 import { sendResponse } from "../utils";
-import { UpdateMembershipStatusSchema, UpdateVerificationStatusSchema } from "./validator";
+import {
+  UpdateMembershipStatusSchema,
+  UpdateVerificationStatusSchema,
+} from "./validator";
 import { get_staff } from "../../db/admin_ops";
 
 export const UpdateStaffVerificationStatusController = async (
@@ -10,8 +16,14 @@ export const UpdateStaffVerificationStatusController = async (
   res: Response
 ) => {
   try {
-    const { id } = UpdateVerificationStatusSchema.parse(req.body);
-    const user = await UpdateVerificationStatus(id, req.user!.name);
+    const { id, verification_status } = UpdateVerificationStatusSchema.parse(
+      req.body
+    );
+    const user = await UpdateVerificationStatus(
+      id,
+      verification_status,
+      req.user!.name
+    );
     return sendResponse(res, {
       status: 200,
       data: user,
@@ -45,7 +57,6 @@ export const GetStaffController = async (
     });
   }
 };
-
 
 export const UpdateMembershipStatusController = async (
   req: IExtendedRequestWithUser,
