@@ -63,6 +63,7 @@ model User {
   paid             Boolean        @default(false)
   payment_method   PaymentMethod?
   isMember         Boolean        @default(false)
+  member_since     DateTime?
   // info for states
   verifiedBy       String?
   accountedBy      String?

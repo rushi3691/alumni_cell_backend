@@ -30,6 +30,7 @@ const MakeMember = async (id: number) => {
     where: { id, isVerified: true, paid: true },
     data: {
       isMember: true,
+      member_since: new Date(),
     },
   });
   return user;
@@ -40,6 +41,7 @@ const RemoveMember = async (id: number) => {
     where: { id },
     data: {
       isMember: false,
+      member_since: null,
     },
   });
   return user;
