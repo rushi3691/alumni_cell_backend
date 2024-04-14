@@ -1,5 +1,5 @@
 import { OAuth2Client } from "google-auth-library";
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { sendResponse } from "../utils";
 import { IExtendedRequest } from "./custom_types";
 
@@ -35,12 +35,12 @@ export const GoogleAuthMiddleware = async (
     req.email = payload["email"];
 
     next();
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
     sendResponse(res, {
       status: 401,
       data: null,
-      error: "Unauthorized",
+      error: e.message,
     });
   }
 };

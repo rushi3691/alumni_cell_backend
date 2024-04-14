@@ -1,8 +1,7 @@
-import { CookieOptions, Response } from "express";
+import { Response } from "express";
 import { create_user, get_user_by_uuid } from "../../db/user_ops";
 import { IExtendedRequest } from "./custom_types";
 import { sendResponse } from "../utils";
-import { getSignedToken } from "./jwt";
 import { generate_cookie } from "./cookie";
 
 export const LoginController = async (req: IExtendedRequest, res: Response) => {
@@ -34,7 +33,7 @@ export const LoginController = async (req: IExtendedRequest, res: Response) => {
     return sendResponse(res, {
       status: 500,
       data: null,
-      error: "Internal Server Error",
+      error: error.message,
     });
   }
 };

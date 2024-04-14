@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import {
-  GetAllUsers,
   UpdateMembershipStatus,
   UpdateVerificationStatus,
 } from "../../db/verification_ops";

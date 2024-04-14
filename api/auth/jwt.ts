@@ -86,7 +86,7 @@ export const isAdmin = (
     return sendResponse(res, {
       status: 403,
       data: null,
-      error: "Forbidden",
+      error: "You're not an Admin",
     });
   }
 };
@@ -102,7 +102,7 @@ export const isVerificationStaff = (
     return sendResponse(res, {
       status: 403,
       data: null,
-      error: "Forbidden",
+      error: "You're not a Verification Staff Member",
     });
   }
 };
@@ -118,7 +118,7 @@ export const isAccountsStaff = (
     return sendResponse(res, {
       status: 403,
       data: null,
-      error: "Forbidden",
+      error: "You're not an Accounts Staff Member",
     });
   }
 };
@@ -134,7 +134,7 @@ export const isMember = (
     return sendResponse(res, {
       status: 403,
       data: null,
-      error: "Forbidden",
+      error: "You're not a Member",
     });
   }
 };
@@ -150,7 +150,7 @@ export const isVerified = (
     return sendResponse(res, {
       status: 403,
       data: null,
-      error: "Forbidden",
+      error: "You're not verified yet",
     });
   }
 };
@@ -166,7 +166,7 @@ export const isPaid = (
     return sendResponse(res, {
       status: 403,
       data: null,
-      error: "Forbidden",
+      error: "You're not paid for the membership yet",
     });
   }
 };
@@ -187,7 +187,7 @@ export const isStaff = (
     return sendResponse(res, {
       status: 403,
       data: null,
-      error: "Forbidden",
+      error: "You're not a Staff Member",
     });
   }
 };

@@ -47,7 +47,7 @@ export const CreateOrderController = async (
     return sendResponse(res, {
       data: null,
       status: 400,
-      error: "Not able to create order. Please try again!",
+      error: "Couldn't create order. Please try again!",
     });
   }
 };
@@ -105,11 +105,11 @@ export const verify_payment = async (req: IExtendedRequest, res: Response) => {
       status: 200,
       error: null,
     });
-  } catch (error) {
+  } catch (error: any) {
     return sendResponse(res, {
       data: null,
       status: 500,
-      error: error,
+      error: error.message,
     });
   }
 };
