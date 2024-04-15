@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { sendResponse } from "../utils";
+import { COOKIE_NAME } from "./cookie";
 
 export interface IJWTPayload {
   id: number;
@@ -57,7 +58,7 @@ export const jwtVerifyMiddleware = (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies["my_token"];
+    const token = req.cookies[COOKIE_NAME];
     if (!token) {
       throw new Error("No token found");
     }
