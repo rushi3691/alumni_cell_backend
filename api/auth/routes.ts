@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { GoogleAuthMiddleware } from "./google_auth";
-import { LoginController } from "./login_controller";
+import { LoginController, LogoutController } from "./login_controller";
 import { jwtVerifyMiddleware } from "./jwt";
 import {
   RegisterControllerAlumni,
@@ -34,14 +34,7 @@ const router = Router();
  *         description: Internal server error
  */
 router.post("/login", GoogleAuthMiddleware, LoginController);
-router.post("/logout", (req, res) => {
-  res.clearCookie("my_token");
-  sendResponse(res, {
-    status: 200,
-    data: null,
-    error: null,
-  });
-});
+router.post("/logout", LogoutController);
 //  name: z.string(),
 //   roll_number: z.string(),
 //   batch: z.string(),

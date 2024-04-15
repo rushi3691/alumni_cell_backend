@@ -1,8 +1,8 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { create_user, get_user_by_uuid } from "../../db/user_ops";
 import { IExtendedRequest } from "./custom_types";
 import { sendResponse } from "../utils";
-import { generate_cookie } from "./cookie";
+import { COOKIE_NAME, generate_cookie } from "./cookie";
 
 export const LoginController = async (req: IExtendedRequest, res: Response) => {
   try {
@@ -36,4 +36,13 @@ export const LoginController = async (req: IExtendedRequest, res: Response) => {
       error: error.message,
     });
   }
+};
+
+export const LogoutController = async (req: Request, res: Response) => {
+  res.clearCookie(COOKIE_NAME);
+  return sendResponse(res, {
+    status: 200,
+    data: null,
+    error: null,
+  });
 };

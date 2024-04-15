@@ -2,6 +2,8 @@ import { User } from "@prisma/client";
 import { getSignedToken } from "./jwt";
 import { CookieOptions, Response } from "express";
 
+export const COOKIE_NAME = "aa_token";
+
 export const generate_cookie = (res: Response, user: User) => {
   const new_token = getSignedToken(
     {
@@ -25,5 +27,5 @@ export const generate_cookie = (res: Response, user: User) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
   };
-  return res.cookie("my_token", new_token, cookieOptions);
+  return res.cookie(COOKIE_NAME, new_token, cookieOptions);
 };
