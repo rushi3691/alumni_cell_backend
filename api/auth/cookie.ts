@@ -23,6 +23,7 @@ export const generate_cookie = (res: Response, user: User) => {
   const cookieOptions: CookieOptions = {
     sameSite: process.env.NODE_ENV === "production" && "strict",
     path: "/",
+    domain: process.env.NODE_ENV === "production" ? ".iitgoa.ac.in" : undefined,
     expires: new Date(Date.now() + 86100000), // 1day
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
