@@ -80,7 +80,6 @@ export const update_staff = async (staff_data: IUpdateStaffData) => {
       gender: staff_data.gender,
       role: staff_data.role,
       institute_number: staff_data.institute_number,
-      joining_year: staff_data.joining_year,
       mobile: staff_data.mobile,
     },
   });

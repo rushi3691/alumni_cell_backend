@@ -34,7 +34,6 @@ export const RegisterStaffSchema = z.object({
   dob: z.coerce.date(),
   role: z.enum(["VERIFICATION_STAFF", "PAYMENT_STAFF"]),
   institute_number: z.string(),
-  joining_year: z.number(),
   mobile: z.string(),
 });
 
