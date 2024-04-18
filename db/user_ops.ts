@@ -63,6 +63,7 @@ export const update_user = async (user_data: IUpdateUserData) => {
       work_experience: user_data.work_experience,
       skills: user_data.skills,
       payment_method: user_data.payment_method,
+      registrationStatus: "PENDING"
       // ...user_data,
     },
   });
@@ -81,6 +82,7 @@ export const update_staff = async (staff_data: IUpdateStaffData) => {
       role: staff_data.role,
       institute_number: staff_data.institute_number,
       mobile: staff_data.mobile,
+      registrationStatus: "PENDING"
     },
   });
   return staff;
