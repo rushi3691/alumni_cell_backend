@@ -19,6 +19,7 @@ export const RegisterUserSchema = z.object({
   skills: z.array(z.string()),
   address: z.string(),
   is_consent: z.boolean(),
+  reg_or_edit: z.enum(["REGISTER", "EDIT"]),
 });
 
 export type RegisterUserSchemaType = z.infer<typeof RegisterUserSchema>;

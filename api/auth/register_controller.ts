@@ -12,11 +12,17 @@ export const RegisterControllerAlumni = async (
     const body = req.body;
     // validate the body
     const validatedBody = RegisterUserSchema.parse(body);
+
+    let payment_method: "ONLINE" | "CONSENT" | undefined;
+    if (validatedBody.reg_or_edit === "REGISTER") {
+      payment_method = validatedBody.is_consent ? "CONSENT" : "ONLINE";
+    }
+
     // update the user
     const user = await update_user({
       id: req.user!.id,
       ...validatedBody,
-      payment_method: validatedBody.is_consent ? "CONSENT" : "ONLINE",
+      payment_method: payment_method,
     });
     // send the response
     return sendResponse(res, {
