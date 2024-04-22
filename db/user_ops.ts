@@ -63,7 +63,7 @@ export const update_user = async (user_data: IUpdateUserData) => {
       work_experience: user_data.work_experience,
       skills: user_data.skills,
       payment_method: user_data.payment_method,
-      registrationStatus: "PENDING"
+      registrationStatus: "PENDING",
       // ...user_data,
     },
   });
@@ -82,7 +82,7 @@ export const update_staff = async (staff_data: IUpdateStaffData) => {
       role: staff_data.role,
       institute_number: staff_data.institute_number,
       mobile: staff_data.mobile,
-      registrationStatus: "PENDING"
+      registrationStatus: "PENDING",
     },
   });
   return staff;
@@ -125,13 +125,29 @@ export const delete_user_by_uuid = async (uuid: string) => {
 };
 
 // update user's paid status
-export const update_user_paid_status = async (id: number) => {
+export const update_user_paid_status_for_online_payment = async (
+  id: number
+) => {
   const user = await prisma.user.update({
     where: {
       id,
     },
     data: {
       paid: true,
+      accountedBy: "ONLINE",
+      payment_method: "ONLINE",
+    },
+  });
+  return user;
+};
+
+export const update_user_payment_method_for_consent = async (id: number) => {
+  const user = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: {
+      payment_method: "CONSENT",
     },
   });
   return user;

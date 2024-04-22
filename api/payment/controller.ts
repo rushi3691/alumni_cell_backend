@@ -5,7 +5,10 @@ import { razorpay } from "./razorpary";
 import { create_order, update_order } from "../../db/payment_ops";
 import { sendResponse } from "../utils";
 import crypto from "crypto";
-import { update_user_paid_status } from "../../db/user_ops";
+import {
+  update_user_paid_status_for_online_payment,
+  update_user_payment_method_for_consent,
+} from "../../db/user_ops";
 import { IExtendedRequest } from "../auth/custom_types";
 import { OrderSchema } from "./validator";
 import { generate_cookie } from "../auth/cookie";
@@ -85,7 +88,9 @@ export const verify_payment = async (req: IExtendedRequest, res: Response) => {
 
     const order_stored = await update_order(order, payment);
     if (order_stored.reason === "MEMBERSHIP") {
-      const user = await update_user_paid_status(order_stored.userId);
+      const user = await update_user_paid_status_for_online_payment(
+        order_stored.userId
+      );
       return sendResponse(generate_cookie(res, user), {
         data: {
           orderId: razorpayOrderId,
@@ -101,6 +106,28 @@ export const verify_payment = async (req: IExtendedRequest, res: Response) => {
       data: {
         orderId: razorpayOrderId,
         paymentId: razorpayPaymentId,
+      },
+      status: 200,
+      error: null,
+    });
+  } catch (error: any) {
+    return sendResponse(res, {
+      data: null,
+      status: 500,
+      error: error.message,
+    });
+  }
+};
+
+export const ConsentController = async (
+  req: IExtendedRequestWithUser,
+  res: Response
+) => {
+  try {
+    const user = await update_user_payment_method_for_consent(req.user!.id);
+    return sendResponse(res, {
+      data: {
+        user: user,
       },
       status: 200,
       error: null,

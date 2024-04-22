@@ -1,7 +1,11 @@
 import { Router } from "express";
 import crypto from "crypto";
 
-import { CreateOrderController, verify_payment } from "./controller";
+import {
+  ConsentController,
+  CreateOrderController,
+  verify_payment,
+} from "./controller";
 import { jwtVerifyMiddleware } from "../auth/jwt";
 
 const router = Router();
@@ -44,5 +48,7 @@ router.post("/paymentCapture", (req, res) => {
     res.status(400).send("Invalid signature");
   }
 });
+
+router.post("/give-consent", jwtVerifyMiddleware, ConsentController);
 
 export default router;
