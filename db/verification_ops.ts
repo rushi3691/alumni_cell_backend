@@ -57,6 +57,9 @@ export const GetAllUsers = async (
   const users = await prisma.user.findMany({
     where: {
       role: "ALUMNI",
+      payment_method: {
+        not: null,
+      },
     },
     take: limit,
     skip: offset,
