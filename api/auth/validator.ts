@@ -1,15 +1,15 @@
 import { z } from "zod";
 
-const RegisterSchema = z.object({
-  is_consent: z.boolean(),
-  reg_or_edit: z.literal("REGISTER"),
-});
+// const RegisterSchema = z.object({
+//   is_consent: z.boolean(),
+//   reg_or_edit: z.literal("REGISTER"),
+// });
 
-const EditSchema = z.object({
-  reg_or_edit: z.literal("EDIT"),
-});
+// const EditSchema = z.object({
+//   reg_or_edit: z.literal("EDIT"),
+// });
 
-const RegisterEditSchema = z.union([RegisterSchema, EditSchema]);
+// const RegisterEditSchema = z.union([RegisterSchema, EditSchema]);
 
 export const RegisterUserSchema = z
   .object({
@@ -30,14 +30,15 @@ export const RegisterUserSchema = z
     work_experience: z.string(),
     skills: z.array(z.string()),
     address: z.string(),
+    // reg_or_edit: z.enum(["REGISTER", "EDIT"]),
   })
-  .and(RegisterEditSchema);
+  // .and(RegisterEditSchema);
 
 export type RegisterUserSchemaType = z.infer<typeof RegisterUserSchema>;
 
 export type IUpdateUserData = RegisterUserSchemaType & {
   id: number;
-  payment_method?: "ONLINE" | "CONSENT";
+  // payment_method?: "ONLINE" | "CONSENT";
 };
 
 export const RegisterStaffSchema = z.object({

@@ -62,7 +62,7 @@ export const update_user = async (user_data: IUpdateUserData) => {
       github: user_data.github,
       work_experience: user_data.work_experience,
       skills: user_data.skills,
-      payment_method: user_data.payment_method,
+      // payment_method: user_data.payment_method,
       registrationStatus: "PENDING",
       // ...user_data,
     },
